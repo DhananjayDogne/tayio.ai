@@ -1,7 +1,7 @@
 const { createSlice, nanoid } = require('@reduxjs/toolkit');
 
 const initialState = {
-    users: [{ id: 1, name: "John" }, { id: 2, name: "Doe" }]
+    users: []
 }
 
 const userSlice = createSlice({
@@ -17,19 +17,20 @@ const userSlice = createSlice({
             state.users.push(data);
         },
         getUser: (state, action) => { 
-            console.log(action.payload);
             state.users.map((user) => user.id === action.payload.id ? data : user);
+            console.log(state.users);
         },
         editUser: (state, action) => {
-            const data = {
-                id: action.payload.id,
-                name: action.payload.name,
-                lname: action.payload.lastName
+            const newdata = action.payload;
+            console.log(newdata);
+            for (let user of state.users) {
+                if (user.id === newdata.id) {
+                    user = newdata;
+                }
             }
-            state.users = state.users.map((user) => user.id === action.payload.id ? data : user);
+            console.log(state.users);
         },
         removeUser: (state, action) => {
-            console.log(action);
             state.users = state.users.filter((user) => user.id !== action.payload);
         }
     }

@@ -1,9 +1,12 @@
 'use client'
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useSelector,useDispatch } from 'react-redux';
-import { addUser } from '../../../../redux/slice';
+import { editUser } from '../../../../redux/slice';
 
 const EditContactForm = (param) => {
+
+    const router = useRouter();
     const dispatch = useDispatch();
 
     //get all data
@@ -13,12 +16,11 @@ const EditContactForm = (param) => {
 
     //get data from redux store
     const olddata = contacts.filter(contact => contact.id === id);
+     
 
-
-    const [name, setName] = useState('');
-    const [lastName, setLastName] = useState('');
+    const [name, setName] = useState( olddata[0].name );
+    const [lastName, setLastName] = useState( olddata[0].lname);
     
-    console.log(olddata);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -26,13 +28,14 @@ const EditContactForm = (param) => {
             name: name,
             lastName: lastName
         }
-        dispatch(addUser(data));
+        dispatch(editUser(data));
         setName('');
         setLastName('');
+        router.push('/contact');
     };
 
     return (
-        <div className='p-6 mt-8 max-w-lg mx-auto bg-white rounded-lg shadow-md border border-gray-300'>
+        <div className='text-black p-6 mt-8 max-w-lg mx-auto bg-white rounded-lg shadow-md border border-gray-300'>
             <h1 className='text-center text-xl font-semibold mb-4'>Add Contact</h1>
             <form className="grid gap-4" onSubmit={handleSubmit}>
                 <div>
@@ -63,7 +66,7 @@ const EditContactForm = (param) => {
                     type="submit"
                     className='mt-4 w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
                 >
-                    Add Contact
+                    Edit Contact
                 </button>
             </form>
         </div>
