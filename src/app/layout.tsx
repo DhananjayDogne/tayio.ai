@@ -3,8 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers }  from "./redux/provider";
 import SideNav from "./sidenav/page";
-// import sidenav from "../app/sidenav/page";
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -19,14 +17,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      
       <body className={inter.className}>
         <Providers>
-          <div className="sidebar">
-          <SideNav />
-          </div>
-          <div className="page-content">
+          <SideNav/>
             {children}
-            </div>
+            
          </Providers>
          
       </body>
