@@ -5,7 +5,7 @@ import Map from '../component/Map';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 const queryClient = new QueryClient();
 
-const DashboardPage: React.FC = () => {
+const DashboardPage = () => {
   return (
     <QueryClientProvider client={queryClient}>
 
